@@ -1,0 +1,61 @@
+---
+settings:
+  name: Replication
+  platform: cloud
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  langs: ja-jp,us-en,zh-cn,ko-kr
+sidebar:
+  entries:
+  - title: Cloud Manager のすべてのドキュメント
+    url: https://docs.netapp.com/us-en/cloud-manager-family
+  - title: レプリケーションドキュメント
+    url: "/index.html"
+  - title: リリースノート
+    url: "/whats-new.html"
+  - title: はじめに
+    entries:
+    - title: レプリケーションサービスについて説明します
+      url: "/concept-replication.html"
+    - title: データレプリケーションを設定
+      url: "/task-replicating-data.html"
+  - title: データレプリケーションを管理
+    url: "/task-managing-replication.html"
+  - title: 概念
+    entries:
+    - title: レプリケーションポリシー
+      url: "/concept-replication-policies.html"
+    - title: バックアップポリシー
+      url: "/concept-backup-policies.html"
+  - title: 知識とサポート
+    entries:
+    - title: サポートに登録します
+      url: "/task-support-registration.html"
+    - title: ヘルプを表示します
+      url: "/task-get-help.html"
+  - title: 法的通知
+    url: "/legal-notices.html"
+homepage:
+  tiles:
+  - title: はじめに
+    links:
+    - title: レプリケーションサービスについて説明します
+      url: concept-replication.html
+    - title: データレプリケーションを設定
+      url: task-replicating-data.html
+  - title: レプリケーションサービスを使用します
+    links:
+    - title: データレプリケーションを管理
+      url: task-managing-replication.html
+  - title: ブログコミュニティ
+    links:
+    - title: ネットアップコミュニティ
+      url: https://community.netapp.com/t5/Cloud-Data-Services/ct-p/CDS
+    - title: Cloud Central のブログです
+      url: https://cloud.netapp.com/blog
+    - title: クラウドに関する Web セミナー
+      url: https://cloud.netapp.com/events
+product-family: {}

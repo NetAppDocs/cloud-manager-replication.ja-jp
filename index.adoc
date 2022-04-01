@@ -1,0 +1,15 @@
+---
+layout: astra 
+sidebar: sidebar 
+permalink: index.html 
+lead: Replicate data between ONTAP storage systems to support backup and disaster recovery to the cloud or between clouds. 
+summary: ONTAP ストレージシステム間でデータをレプリケートして、クラウドまたはクラウド間でバックアップとディザスタリカバリをサポートします。 
+---
+= レプリケーションのドキュメント
+:hardbreaks:
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+

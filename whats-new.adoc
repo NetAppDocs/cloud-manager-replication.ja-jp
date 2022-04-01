@@ -1,0 +1,38 @@
+---
+sidebar: sidebar 
+permalink: whats-new.html 
+keywords: 'what"s new, features, new, release notes, bugs, limitations, known issues, enhancements, fixes' 
+summary: Replication サービスの新機能について説明します。 
+---
+= 新機能
+:hardbreaks:
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Replication サービスの新機能について説明します。
+
+
+
+== 2021 年 9 月 2 日
+
+
+
+=== Amazon FSX for ONTAP のサポート
+
+Cloud Volumes ONTAP システムまたはオンプレミスの ONTAP クラスタから ONTAP ファイルシステム用の Amazon FSX にデータをレプリケートできるようになりました。
+
+
+
+== 2021 年 5 月 5 日
+
+
+
+=== インターフェイスの再設計
+
+使いやすく、 Cloud Manager のユーザインターフェイスの最新のルックアンドフィールに合わせて、 Replication タブが再設計されました。
+
+image:replication.gif["Cloud Manager の再設計された Replication タブのスクリーンショット。ボリューム関係のリストを示しています。"]

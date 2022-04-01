@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+  <block id="b2ff5c112923ab1a84f9024c034ae3c3" category="summary">Cloud Manager 作業環境間でデータをレプリケートできます。1 回限りのデータレプリケーションを選択してクラウドとの間でデータを移動することも、繰り返しスケジュールを選択してディザスタリカバリや長期保管に備えることもできます。</block>
+  <block id="87531525c3b816a3a29dbbcbcd9e58b1" category="doc">レプリケーションポリシーについて説明します</block>
+  <block id="874fbc5828fab7b54057e8b64a511b45" category="paragraph">Cloud Manager でデータレプリケーションを設定するときに、レプリケーションポリシーの選択が必要になることがあります。レプリケーションポリシーは、ストレージシステムがソースボリュームからデスティネーションボリュームにデータをレプリケートする方法を定義します。</block>
+  <block id="e40495076bb4b5e4783f1d1ee0ad0a16" category="section-title">レプリケーションポリシーの機能</block>
+  <block id="e19e3a549d24cbd0e2a4d7afde5135b9" category="paragraph">ONTAP オペレーティングシステムでは、 Snapshot コピーと呼ばれるバックアップが自動的に作成されます。Snapshot コピーは、ボリュームの読み取り専用イメージで、ある時点のファイルシステムの状態をキャプチャします。</block>
+  <block id="651f76dd5d1cb2befad7f11fa1e9daaa" category="paragraph">システム間でデータをレプリケートする場合、ソースボリュームからデスティネーションボリュームに Snapshot コピーをレプリケートします。レプリケーションポリシーは、ソースボリュームからデスティネーションボリュームにレプリケートする Snapshot コピーを指定します。</block>
+  <block id="85fff253f12e639aac3437b2c24d5139" category="admonition">レプリケーションポリシーは、ディザスタリカバリ保護やディスクツーディスクのバックアップとリカバリを提供する SnapMirror テクノロジと SnapVault テクノロジを基盤としているため、 _protection_policies とも呼ばれます。</block>
+  <block id="662a62e668373d0927ec7c1bfeb2b319" category="paragraph">次の図は、 Snapshot コピーとレプリケーションポリシーの関係を示しています。</block>
+  <block id="3802602e17f5cc165c7507f1c9a2e847" category="inline-image-macro">この図は、ソースボリューム上の Snapshot コピーと、ソースボリュームからデスティネーションボリュームへのすべてまたは特定の Snapshot コピーのレプリケーションを指定するレプリケーションポリシーを示しています。</block>
+  <block id="81818114bafdd6d3c20723bfbb51f97c" category="paragraph"><block ref="81818114bafdd6d3c20723bfbb51f97c" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="0f237b0feffecdddaf6649c2d6d7809a" category="section-title">レプリケーションポリシーのタイプ</block>
+  <block id="ef8a1d695c35e57928d4b85c35185a8a" category="paragraph">レプリケーションポリシーには、次の 3 種類があります。</block>
+  <block id="b07d46952856e1f9bc81741e810a135d" category="list-text">A_Mirror_policy は、新しく作成された Snapshot コピーをデスティネーションボリュームにレプリケートします。</block>
+  <block id="5ee26df8a5cbc26419cd11a2a77ad92d" category="paragraph">これらの Snapshot コピーを使用すると、災害復旧や 1 回限りのデータ複製に備えて、ソース・ボリュームを保護できます。データアクセス用のデスティネーションボリュームは、いつでもアクティブにできます。</block>
+  <block id="9bca25bd28efdcfd3aebccab5c918fcb" category="list-text">a_Backup_policy は、特定の Snapshot コピーをデスティネーションボリュームにレプリケートし、通常、ソースボリューム上で保持するよりも長期間にわたって Snapshot コピーを保持します。</block>
+  <block id="91934bdbfdc3c5214382994a56a46886" category="paragraph">データが破損または損失した場合に、これらの Snapshot コピーからデータをリストアし、標準準拠やその他のガバナンス関連の目的で保持できます。</block>
+  <block id="264d1d85979e565f376768c29ac5980a" category="list-text">A_Mirror と Backup_policy は、ディザスタリカバリと長期保持の両方を提供します。</block>
+  <block id="c5e319c770118f998f576ebb9b10069b" category="paragraph">各システムには、デフォルトのミラーおよびバックアップポリシーが含まれており、多くの状況に適しています。カスタムポリシーが必要な場合は、 System Manager を使用して独自のポリシーを作成できます。</block>
+  <block id="d9ae190c29f834ec7084e50731eb8fea" category="paragraph">次の図は、ミラーポリシーとバックアップポリシーの違いを示しています。ミラーポリシーは、ソースボリュームで使用可能な Snapshot コピーをミラーリングします。</block>
+  <block id="5a7549c9e8b1c18d5706ec474c2a8ba4" category="inline-image-macro">この図は、ソースボリューム上の Snapshot コピーと、ソースボリュームをミラーリングするミラーデスティネーションボリュームを示しています。</block>
+  <block id="144abdc56cc3fbdbfae0ef89d327605b" category="paragraph"><block ref="144abdc56cc3fbdbfae0ef89d327605b" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="35b902a7b4de8c8923d5c5b39b814e95" category="paragraph">通常、バックアップポリシーでは、ソースボリュームに保持されている Snapshot コピーよりも長い期間 Snapshot コピーが保持されます。</block>
+  <block id="bf2150ef9467439727e9ba26af10d436" category="inline-image-macro">この図は、ソースボリューム上およびバックアップデスティネーションボリューム上の Snapshot コピーを示しています。 SnapVault は Snapshot コピーを長期保持用に保持するため、デスティネーションボリュームの Snapshot コピーがこれよりも多くなっています。</block>
+  <block id="ad8bcd8268bd244944d22d0323e8d319" category="paragraph"><block ref="ad8bcd8268bd244944d22d0323e8d319" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="95c3127441b4989e3d78b50920629c66" category="summary">Replication サービスの新機能について説明します。</block>
+  <block id="490414e0366b091220802d406e52c076" category="doc">新機能</block>
+  <block id="3b7a1a77cdd08778e0827fbf312442b7" category="section-title">2021 年 9 月 2 日</block>
+  <block id="6c88f9e17d9019e00177d64f9db55d2e" category="section-title">Amazon FSX for ONTAP のサポート</block>
+  <block id="59dfc17500b1e0b8d1824eb8b1413080" category="paragraph">Cloud Volumes ONTAP システムまたはオンプレミスの ONTAP クラスタから ONTAP ファイルシステム用の Amazon FSX にデータをレプリケートできるようになりました。</block>
+  <block id="5057fdb214d9f3773bc386ba2aa1fcb0" category="section-title">2021 年 5 月 5 日</block>
+  <block id="1473f0729c8bea54a5077a19ab764c47" category="section-title">インターフェイスの再設計</block>
+  <block id="5a0a1bceb9fa4494f5bd231c6eb87a5b" category="paragraph">使いやすく、 Cloud Manager のユーザインターフェイスの最新のルックアンドフィールに合わせて、 Replication タブが再設計されました。</block>
+  <block id="0f9405518138d20fd96d78fe19dabf84" category="inline-image-macro">Cloud Manager の再設計された Replication タブのスクリーンショット。ボリューム関係のリストを示しています。</block>
+  <block id="ad0ba121971067cff2f6c3263f846473" category="paragraph"><block ref="ad0ba121971067cff2f6c3263f846473" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="958c15a697dc50afc44ab3fe2e061aec" category="summary">2 つのシステム間でデータレプリケーションをセットアップしたら、 Cloud Manager からデータレプリケーションスケジュールと関係を管理できます。</block>
+  <block id="2e4ca84ff13f65389599985c5d2a9f08" category="doc">スケジュールと関係の管理</block>
+  <block id="f3a29486bed19a90f2da6d007818b427" category="list-title">手順</block>
+  <block id="7a67cf78cd95f79c4c0a3698f1fc9113" category="list-text">[*Replication] をクリックします。</block>
+  <block id="775f5846d28de12857c9c89ae5d4a6e1" category="list-text">データレプリケーションリレーションシップのステータスを確認して、正常であることを確認します。</block>
+  <block id="384cf3526eba01b7701f7fde08ba751e" category="admonition">関係のステータスがアイドルで、ミラーの状態が初期化されていない場合は、定義されたスケジュールに従ってデータレプリケーションを実行するために、デスティネーションシステムから関係を初期化する必要があります。この関係は、 System Manager またはコマンドラインインターフェイス（ CLI ）を使用して初期化できます。これらの状態は、デスティネーションシステムに障害が発生してからオンラインに戻ると表示されます。</block>
+  <block id="4a4fc2634c97e1e3949084431ae3f4e1" category="list-text">ボリューム関係の操作メニューをクリックし、実行できる操作のいずれかを選択します。</block>
+  <block id="2dc72a54b6e5367898238d6dcb40d246" category="inline-image-macro">スクリーンショット： ［ Replication Status ］ ページで使用できるアクションのリストが表示されます。</block>
+  <block id="594fdfa890e958e4ffa58557886eb75c" category="paragraph"><block ref="594fdfa890e958e4ffa58557886eb75c" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="7e237ab45b209987e5eb6464c44abac5" category="paragraph">次の表に、使用可能なアクションを示します。</block>
+  <block id="004bf6c9a40003140292e97330236c53" category="cell">アクション</block>
+  <block id="b5a7adde1af5c87d7fd797b6245c2a39" category="cell">説明</block>
+  <block id="a82be0f551b8708bc08eb33cd9ded0cf" category="cell">情報</block>
+  <block id="d94a71d39d4b5957a9cb08d7b25dc8d1" category="cell">ボリューム関係に関する詳細が表示されます。これには、転送情報、前回の転送情報、ボリュームに関する詳細、関係に割り当てられている保護ポリシーに関する情報が含まれます。</block>
+  <block id="e4c38d6d45baf080943d323dd51a2ce8" category="cell">休憩</block>
+  <block id="3592520f476679c41ae085dbea13f855" category="inline-link">ONTAP 9 ボリュームディザスタリカバリエクスプレスガイド</block>
+  <block id="f2bbb0bef78070a1fd8268d9772a2d0c" category="cell">ソースボリュームとデスティネーションボリューム間の関係を解除し、データアクセスのためにデスティネーションボリュームをアクティブにします。このオプションは通常、データの破損、偶発的な削除、オフライン状態などのイベントが原因でソースボリュームがデータを処理できない場合に使用します。データアクセス用のデスティネーションボリュームの設定とソースボリュームの再アクティブ化については、を参照してください<block ref="af502c2f8fb660944e2ad52aad1efcc3" category="inline-link-rx"></block>。</block>
+  <block id="45ada1a8b02e7bf10200aedcf56d13c8" category="cell">再同期</block>
+  <block id="d41d8cd98f00b204e9800998ecf8427e" category="doc"></block>
+  <block id="56f83d4dac34839a8f3a283bafd276e8" category="paragraph">ボリューム間の関係を再確立し、定義されたスケジュールに従ってデータレプリケーションを再開します。</block>
+  <block id="f43fdb6878de7980d30d532ea44e0baf" category="admonition">ボリュームを再同期すると、デスティネーションボリュームの内容がソースボリュームの内容によって上書きされます。</block>
+  <block id="5209b5da9877de39bd3385b8056be084" category="paragraph">デスティネーションボリュームからソースボリュームへデータを再同期化する逆再同期を実行するには、を参照してください<block ref="af502c2f8fb660944e2ad52aad1efcc3" category="inline-link-rx"></block>。</block>
+  <block id="fb1729afce23e1bd1840f0ba32ef8e91" category="cell">リバース再同期</block>
+  <block id="fdd14ac0ba0eae4cebe22311577994f3" category="cell">ソースボリュームとデスティネーションボリュームの役割を逆にします。元のソースボリュームの内容は、デスティネーションボリュームの内容によって上書きされます。これは、オフラインになったソースボリュームを再アクティブ化する場合に役立ちます。前回のデータレプリケーションからソースボリュームが無効になったまでの間に元のソースボリュームに書き込まれたデータは保持されません。</block>
+  <block id="67d85e3bd91876173776dc6f189ff7ac" category="cell">スケジュールを編集します</block>
+  <block id="6f95f7aca41a993373d4a1096d61c7f0" category="cell">データレプリケーションの別のスケジュールを選択できます。</block>
+  <block id="369e2ad9fb57b7fa6aea36dd7e48cf58" category="cell">最大転送レートを編集します</block>
+  <block id="35dbbeea8ab5e735a28c3b41ed25bca0" category="cell">データを転送できる最大レート（キロバイト / 秒）を編集できます。</block>
+  <block id="06933067aafd48425d67bcb01bba5cb6" category="cell">更新</block>
+  <block id="16685aa35f9f2843a357407642b0d7d9" category="cell">増分転送を開始してデスティネーションボリュームを更新します。</block>
+  <block id="f2a6c498fb90ee345d997f888fce3b18" category="cell">削除</block>
+  <block id="09cd2e52d52004647bc6c39549be0b94" category="cell">ソースボリュームとデスティネーションボリューム間のデータ保護関係を削除します。つまり、ボリューム間でデータレプリケーションが行われなくなります。この操作では、データアクセスのデスティネーションボリュームはアクティブ化されません。また、システム間に他のデータ保護関係がない場合は、クラスタピア関係と Storage VM （ SVM ）ピア関係も削除されます。</block>
+  <block id="b4feae198be8f3f2843284b7b6d126a4" category="paragraph">アクションを選択すると、 Cloud Manager によって関係またはスケジュールが更新されます。</block>
+  <block id="ce21e7ae4271271294ccbf54c8fd6864" category="summary">ネットアップでは、 Cloud Manager をさまざまな方法でサポートしています。ナレッジベース（ KB ）記事やコミュニティフォーラムなど、 24 時間 365 日利用可能な幅広いセルフサポートオプションをご用意しています。サポート登録には、 Web チケット処理によるリモートテクニカルサポートが含まれます。</block>
+  <block id="fabfc25ef8996fd90836e58a4c0b26b6" category="doc">ヘルプを表示します</block>
+  <block id="7ccaf84febc0ed633fbdbadb8d488a7e" category="paragraph"><block ref="7ccaf84febc0ed633fbdbadb8d488a7e" category="inline-link-macro-rx"></block></block>
+  <block id="f44753cd1ded9ad0818a4d62481460e9" category="summary">ミラーポリシーとは異なり、バックアップ SnapVault ポリシーは特定の Snapshot コピーをデスティネーションボリュームにレプリケートします。デフォルトポリシーの代わりに独自のポリシーを使用する場合は、バックアップポリシーの仕組みを理解することが重要です。</block>
+  <block id="77ae0badcc9669dcf09b0b6ddb602a5a" category="paragraph">ミラーポリシーとは異なり、バックアップ（ SnapVault ）ポリシーは、特定の Snapshot コピーをデスティネーションボリュームに複製します。デフォルトポリシーの代わりに独自のポリシーを使用する場合は、バックアップポリシーの仕組みを理解することが重要です。</block>
+  <block id="5a987691c26800bb72299080978208d0" category="section-title">Snapshot コピーのラベルとバックアップ・ポリシーの関係を理解する</block>
+  <block id="84e1eb86d5601303f08cdde720ab00d5" category="paragraph">Snapshot ポリシーは、システムによるボリュームの Snapshot コピーの作成方法を定義します。このポリシーでは、 Snapshot コピーを作成するタイミング、保持するコピー数、ラベルの作成方法を指定します。たとえば、システムでは毎日午前 12 時 10 分に Snapshot コピーを 1 つ作成し、最新のコピーを 2 つ保持して、「 daily 」というラベルを付けることができます。</block>
+  <block id="e80c18b83e4431b140cfd327235ef625" category="paragraph">バックアップポリシーには、デスティネーションボリュームに複製するラベル付き Snapshot コピーと保持するコピー数を指定するルールが含まれています。バックアップポリシーで定義されたラベルは、スナップショットポリシーで定義された 1 つ以上のラベルと一致する必要があります。そうしないと、システムは Snapshot コピーを複製できません。</block>
+  <block id="ae8361f179144c2fabb67c8d6de83a5e" category="paragraph">たとえば、「 daily 」ラベルと「 weekly 」ラベルを含むバックアップポリシーでは、これらのラベルのみを含む Snapshot コピーのレプリケーションが行われます。次の図に示すように、他の Snapshot コピーはレプリケートされません。</block>
+  <block id="9146f7d49f8f0b1c7684522621105c16" category="inline-image-macro">この図は、 Snapshot ポリシーから作成されたソースボリューム上の Snapshot コピーが、バックアップポリシーに基づいてデスティネーションボリュームにレプリケートされる様子を示しています。このバックアップポリシーでは、「 daily 」および「 weekly 」のラベルが設定された Snapshot コピーをレプリケートするように指定されています。</block>
+  <block id="917f71613f685fca1f5480f2402e4328" category="paragraph"><block ref="917f71613f685fca1f5480f2402e4328" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="078de5bc4b102703fbb5d5f16eab4ac5" category="section-title">デフォルトポリシーとカスタムポリシー</block>
+  <block id="82a50f0f6176439f52db3f00249bb062" category="paragraph">デフォルトの Snapshot ポリシーでは、毎時、毎日、および毎週の Snapshot コピーが作成されます。 Snapshot コピーは 6 個の時間単位、 2 個の日単位、および 2 個の週単位 Snapshot コピーが保持されます。</block>
+  <block id="ffd11b2f9d7cbf737e9c7fb470bccfa5" category="paragraph">デフォルトの Snapshot ポリシーでは、デフォルトのバックアップポリシーを簡単に使用できます。デフォルトのバックアップポリシーでは、毎日および毎週の Snapshot コピーが複製され、毎日 7 個、毎週 52 個の Snapshot コピーが保持されます。</block>
+  <block id="148658bf400475bd13a5edab6c870d2f" category="paragraph">カスタムポリシーを作成する場合は、これらのポリシーで定義されたラベルが一致している必要があります。System Manager を使用してカスタムポリシーを作成できます。</block>
+  <block id="30d965eef5ba25c6b9998ae38270b43e" category="doc">法的通知</block>
+  <block id="c59ae8d7beeb519a23478ab048af482c" category="paragraph"><block ref="c59ae8d7beeb519a23478ab048af482c" category="inline-link-macro-rx"></block></block>
+  <block id="6f2ac1cf1da8ec34232c651d4bba0149" category="paragraph"><block ref="6f2ac1cf1da8ec34232c651d4bba0149" category="inline-link-macro-rx"></block></block>
+  <block id="4940124e8487cb4ea36f1511a195cf66" category="inline-link-macro">Cloud Manager 3.9 に関する注意事項</block>
+  <block id="c069fcc68c5dfa73ccc99924c836cae9" category="paragraph"><block ref="c069fcc68c5dfa73ccc99924c836cae9" category="inline-link-macro-rx"></block></block>
+  <block id="aa03d16eacb954c7af08d5001cd67507" category="doc">データレプリケーションを設定</block>
+  <block id="745cc81e54713a1702ada65f4b222bce" category="paragraph">ONTAP 作業環境間でデータをレプリケートするには、データ転送用の 1 回限りのデータレプリケーションを選択するか、ディザスタリカバリまたは長期保管用の繰り返しスケジュールを選択します。たとえば、ディザスタリカバリ用にオンプレミスの ONTAP システムから Cloud Volumes ONTAP へのデータレプリケーションを設定できます。</block>
+  <block id="992753e7f234853a9e0f96d1ff637271" category="section-title">データレプリケーションの要件</block>
+  <block id="3f5c98f2da3fd65fbbfa955b13a433ab" category="paragraph">データをレプリケートするには、 Cloud Volumes ONTAP 、オンプレミス ONTAP クラスタ、 Amazon FSX for ONTAP に関して特定の要件を満たしていることを確認する必要があります。</block>
+  <block id="8e7eaac4ef6ddba0d9f93228ce3ac6e7" category="list-text">作業環境</block>
+  <block id="4afa74830ae584f2b792dfe5b6c79ccc" category="list-text">まだ作成していない場合は、データレプリケーション関係のソースとターゲットの作業環境を作成する必要があります。</block>
+  <block id="64c9a9d3cd7c3ca76cf19b78a96c9b79" category="inline-link">ONTAP 作業環境用の Amazon FSX を作成します</block>
+  <block id="f903e0b8e0f1e5d10c61be1c83633ca0" category="list-text"><block ref="f903e0b8e0f1e5d10c61be1c83633ca0" category="inline-link-rx"></block></block>
+  <block id="a3272fd5c4bd1903de9b1b2f5e1665a8" category="inline-link">AWS で Cloud Volumes ONTAP を起動します</block>
+  <block id="5fc68dd6c2f9e8f9867008288922972c" category="list-text"><block ref="5fc68dd6c2f9e8f9867008288922972c" category="inline-link-rx"></block></block>
+  <block id="70c84621a7336f391b4b7df86b5f1396" category="inline-link">Azure で Cloud Volumes ONTAP を起動します</block>
+  <block id="382c836de95fd7a0d956bd916d408106" category="list-text"><block ref="382c836de95fd7a0d956bd916d408106" category="inline-link-rx"></block></block>
+  <block id="ce3503849689227dd8014f8ed3f5cb5e" category="inline-link">GCP で Cloud Volumes ONTAP を起動します</block>
+  <block id="b1fc335b745b5be1ddedded19d077bf9" category="list-text"><block ref="b1fc335b745b5be1ddedded19d077bf9" category="inline-link-rx"></block></block>
+  <block id="6c0fb6078ec778ca2319e375a19e994b" category="inline-link">既存の Cloud Volumes ONTAP システムを追加</block>
+  <block id="c10b8a77856c1097f8b3038f1bfab45b" category="list-text"><block ref="c10b8a77856c1097f8b3038f1bfab45b" category="inline-link-rx"></block></block>
+  <block id="a1ebf612d281c8e7fb16bbfa253b9627" category="inline-link">ONTAP クラスタを検出</block>
+  <block id="49aaf65c31a811a37b2627a951f6f6d2" category="list-text"><block ref="49aaf65c31a811a37b2627a951f6f6d2" category="inline-link-rx"></block></block>
+  <block id="3fbe74eae84714fcfdd21edafe54f77f" category="list-text">バージョン要件</block>
+  <block id="9739187f50db857f27b204b12e6d365e" category="inline-link">データ保護パワーガイド</block>
+  <block id="45a002d1b0a2d3b7484b80cb82cbae5f" category="list-text">データを複製する前に、ソースボリュームとデスティネーションボリュームで互換性のある ONTAP バージョンが実行されていることを確認する必要があります。詳細については、を参照してください<block ref="45ba42574012af0d87ad3af840143483" category="inline-link-rx"></block>。</block>
+  <block id="fe6efbb95f9a85a506ca5269c7f8ff90" category="list-text">Cloud Volumes ONTAP 固有の要件</block>
+  <block id="889d45df47a3ead91725048aa6da9442" category="list-text">インスタンスのセキュリティグループに、必要なインバウンドおよびアウトバウンドのルールが含まれている必要があります。具体的には、 ICMP とポート 11104 および 11105 のルールが必要です。</block>
+  <block id="56a907169092bf547ac6f962beae2e1a" category="paragraph">これらのルールは、事前定義されたセキュリティグループに含まれています。</block>
+  <block id="c08b01fe5c09939cdbabcb370734dad8" category="list-text">異なるサブネットにある 2 つの Cloud Volumes ONTAP システム間でデータをレプリケートするには、サブネットを一緒にルーティングする必要があります（これがデフォルト設定です）。</block>
+  <block id="d5c8c6b85589a3255105df8b8a5a8e77" category="list-text">異なるクラウドプロバイダにある 2 つの Cloud Volumes ONTAP システム間でデータをレプリケートするには、仮想ネットワーク間に VPN 接続が必要です。</block>
+  <block id="4f98fe32c8059fcb89742310b7175e7f" category="list-text">ONTAP クラスタ固有の要件</block>
+  <block id="8c4a805dde66a7461e7760fe982d066f" category="list-text">アクティブな SnapMirror ライセンスがインストールされている必要があります。</block>
+  <block id="e133ed2609aff998f4ad7507f5e823eb" category="list-text">クラスタがオンプレミスにある場合は、企業ネットワークから AWS 、 Azure 、または GCP 内の仮想ネットワークへの接続が必要です。これは通常、 VPN 接続です。</block>
+  <block id="1fbce003d68708feb24931b9e6366f50" category="list-text">ONTAP クラスタは、サブネット、ポート、ファイアウォール、およびクラスタの追加要件を満たしている必要があります。</block>
+  <block id="88c6c83b92078bff672007a244edf6fe" category="inline-link">『クラスタ / SVM ピアリングエクスプレスガイド』</block>
+  <block id="eee57d9d3eea15be2047876cf152e294" category="paragraph">詳細については、を参照してください<block ref="7a715a3c6763f11dce8d04ecae2e7135" category="inline-link-rx"></block>。</block>
+  <block id="4f473a2a941d4fd7b4a68e3cd98e934c" category="list-text">Amazon FSX for ONTAP に固有の要件</block>
+  <block id="e895824a462fdee602e050151c64f0a6" category="list-text">Amazon FSX for ONTAP 作業環境は、データレプリケーション関係のターゲットである必要があります。</block>
+  <block id="7002d9ba5a8e7d19055405e260941870" category="paragraph">ソースは、 Cloud Volumes ONTAP またはオンプレミスの ONTAP クラスタです。</block>
+  <block id="fec5e9f11ead982ba633a364695b9cff" category="list-text">Cloud Volumes ONTAP が送信元である場合は、 VPC ピアリングを有効にするか、トランジットゲートウェイを使用して VPC 間の接続を確認します。</block>
+  <block id="4bf49185216f4e917fd8dcc50ee1ff2c" category="list-text">オンプレミスの ONTAP クラスタがソースの場合は、 Direct Connect または VPN 接続を使用して、オンプレミスネットワークと AWS VPC 間の接続を確認します。</block>
+  <block id="58e046b3f4ec304e4456cda8151a574b" category="section-title">システム間でデータをレプリケート</block>
+  <block id="ab180709f75f8b8d74709444b839ccd3" category="paragraph">データをレプリケートするには、クラウドとの間でデータを移動するのに便利な 1 回限りのデータレプリケーション、またはディザスタリカバリや長期保管に便利な繰り返しスケジュールを選択します。</block>
+  <block id="29e71d65fc647320e822efb6ec422c56" category="list-text">キャンバスページで、ソースボリュームを含む作業環境を選択し、ボリュームを複製する作業環境にドラッグします。</block>
+  <block id="f058b2239a935219edfc3818d7b5cb9e" category="inline-image-macro">スクリーンショット：データレプリケーションプロセスを開始するために別の作業環境の上に配置されている作業環境を示します。</block>
+  <block id="f0fb2fde0c29810d08233a36012cb972" category="paragraph"><block ref="f0fb2fde0c29810d08233a36012cb972" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="362a388c30edcb2f99cceb3fe86d98c1" category="list-text">* Source and Destination Peering Setup * ：このページが表示された場合は、クラスタピア関係用のすべてのクラスタ間 LIF を選択します。</block>
+  <block id="bea31cd643e991ddda33528781bb08e5" category="paragraph">クラスタ間ネットワークは、クラスタピアどうしが _pair-wise full-mesh connectivity_ を持つように設定する必要があります。具体的には、クラスタピア関係にある各クラスタペアの、すべてのインタークラスタ LIF の間に接続が確立されている必要があります。</block>
+  <block id="2de4794fb8257073e92d6ea494fd0157" category="paragraph">これらのページは、複数の LIF を持つ ONTAP クラスタがソースまたはデスティネーションである場合に表示されます。</block>
+  <block id="a6e88d0494a8fa6f3ae3b6727b0d269a" category="list-text">* ソースボリュームの選択 * ：レプリケートするボリュームを選択します。</block>
+  <block id="36e07509be5c7f032ab917fdca1c3155" category="list-text">* デスティネーションのディスクタイプと階層化 * ：ターゲットが Cloud Volumes ONTAP システムの場合は、デスティネーションディスクタイプを選択し、データの階層化を有効にするかどうかを選択します。</block>
+  <block id="fffe1c574a9d13338bd57b8f437e8b38" category="list-text">* デスティネーションボリューム名 * ：デスティネーションボリューム名を指定し、デスティネーションアグリゲートを選択します。</block>
+  <block id="a72bddbb2c5ec4276f61eb5d4c72d29e" category="paragraph">デスティネーションが ONTAP クラスタの場合は、デスティネーション Storage VM も指定する必要があります。</block>
+  <block id="70b03b0b5fddb323cd5727f0aff116da" category="list-text">* 最大転送速度 * ：データを転送できる最大速度（ 1 秒あたりのメガバイト数）を指定します。</block>
+  <block id="c4d4c57bab69ea2730de16df7ca7f541" category="paragraph">転送速度は制限する必要があります。無制限のレートは、他のアプリケーションのパフォーマンスに悪影響を及ぼし、インターネットのパフォーマンスに影響を与える可能性があります。</block>
+  <block id="dc7023569df1ae3b00637768e0eda066" category="list-text">* レプリケーションポリシー * ：デフォルトポリシーを選択するか、 * 追加ポリシー * をクリックして、いずれかの詳細ポリシーを選択します。</block>
+  <block id="43b69288e2e4056e2603dc7b20958252" category="inline-link-macro">レプリケーションポリシーについて説明します</block>
+  <block id="38ae0f8e71302f90ed2bd78cc3558be1" category="paragraph">ヘルプを表示するには、 <block ref="aa986145ecc84d384c81421dbd7256f8" category="inline-link-macro-rx"></block>。</block>
+  <block id="94b8e29e9b4ae2edec5679fafc448461" category="inline-link-macro">バックアップポリシーの仕組みを説明します</block>
+  <block id="07c79d9eb85b0d23c55a7b9b67cf02d8" category="paragraph">カスタムバックアップ（ SnapVault ）ポリシーを選択した場合は、ポリシーに関連付けられたラベルがソースボリューム上の Snapshot コピーのラベルと一致する必要があります。を参照してください。 <block ref="75de9650bf9d481877dc0d18e86ffa75" category="inline-link-macro-rx"></block>。</block>
+  <block id="d3b2b050bb9494cae757b48c9e54e869" category="list-text">* スケジュール * ： 1 回限りのコピーまたは定期的なスケジュールを選択します。</block>
+  <block id="eab21f14d3f6250b2de779be87b8404e" category="paragraph">いくつかのデフォルトスケジュールを使用できます。別のスケジュールを使用する場合は、 System Manager を使用して、 _destination_cluster に新しいスケジュールを作成する必要があります。</block>
+  <block id="b651c9a4bed137033ce440a73927ffcf" category="list-text">* 復習 * ：選択内容を確認して、 * 移動 * をクリックします。</block>
+  <block id="eed124d262a3b5245da6792903502a1f" category="paragraph">Cloud Manager がデータレプリケーションプロセスを開始します。ボリューム関係の詳細はレプリケーションサービスで確認できます。</block>
+  <block id="aeeec0576922eb4490b5fabadc6c4e36" category="summary">NetApp SnapMirror は、 LAN または WAN 経由でデータを高速でレプリケートするため、仮想環境と従来の環境の両方で、高いデータ可用性と高速なデータレプリケーションを実現できます。ネットアップストレージシステムにデータをレプリケートし、セカンダリデータを継続的に更新することで、データを最新の状態に保ちながら、必要なときにいつでもデータを利用できるようになります。外部レプリケーションサーバは必要ありません。</block>
+  <block id="e60519215887d589e148f68a2f5d2a06" category="doc">レプリケーションサービスについて説明します</block>
+  <block id="98f770b0af18ca763421bac22b4b6805" category="section-title">の機能</block>
+  <block id="4d8208136280cbaba3cab05e5996a3a8" category="list-text">ONTAP ストレージシステム間でデータをレプリケートして、クラウドまたはクラウド間でバックアップとディザスタリカバリをサポートします。</block>
+  <block id="58598c037819ab3e58b8ee6d0d634246" category="list-text">高い可用性を備えた信頼性の高い DR 環境を実現します。</block>
+  <block id="6c12db213eb53a8ef7d470254e0395be" category="list-text">ONTAP ストレージ間の効率的なブロックレベルのレプリケーションは高速かつ効率的で、 DR とバックアップの両方をきめ細かくリカバリできます。</block>
+  <block id="20b4f77bd00b4f63a49ec8e08f3bf6a6" category="section-title">コスト</block>
+  <block id="51d8157d48cfe9c64b3f0f386d2e4e7b" category="paragraph">ネットアップでは、レプリケーションサービスの使用料は発生しませんが、データの入力と出力に該当する料金がクラウドプロバイダにあるかどうかを確認する必要があります。</block>
+  <block id="744db3ac634a7aa94269971ca3dc965e" category="section-title">サポートされている作業環境</block>
+  <block id="33a6dd69443b97d9eae9c88809da5d88" category="paragraph">Cloud Manager では、次のタイプの作業環境間でデータレプリケーションを実行できます。</block>
+  <block id="9fd9b4e1af5d0e8b46abbd52a5c740cd" category="cell">ソースの作業環境</block>
+  <block id="e4543e565352b9e4f4e71c2f648026f6" category="cell">サポートされるターゲットの作業環境</block>
+  <block id="117bdbda976fe8b3212bc3b6327a0a1b" category="cell">Cloud Volumes ONTAP</block>
+  <block id="18cf072964a583150dd247485ba75b92" category="list-text">ONTAP 対応の Amazon FSX</block>
+  <block id="c17ce6a7cdcb97581c6d5603ec7d447a" category="list-text">オンプレミスの ONTAP クラスタ</block>
+  <block id="b553c40a28c07760917a84d00649f7fd" category="section-title">データレプリケーションの仕組み</block>
+  <block id="e445c14748daf3ca002770b51d99fc5e" category="paragraph">Cloud Manager では、 SnapMirror テクノロジと SnapVault テクノロジを使用して、別々の ONTAP システムにあるボリューム間のデータレプリケーションを簡易化できます。ソースボリュームとデスティネーションボリュームを特定し、レプリケーションポリシーとスケジュールを選択するだけで済みます。</block>
+  <block id="cac80a54492c3c29d5dde82753de238c" category="paragraph">Cloud Volumes ONTAP の場合、 Cloud Manager は必要なディスクを購入して関係を設定し、レプリケーションポリシーを適用してから、ボリューム間のベースライン転送を開始します。</block>
+  <block id="f2c34e95577ee850c803e71a908cf1ef" category="admonition">ベースライン転送には、ソースデータのフルコピーが含まれます。その後の転送には、ソースデータの差分コピーが含まれます。</block>
+  <block id="cc20b848be9552c96e9f46ed40db533d" category="section-title">サポートされるデータ保護構成</block>
+  <block id="6d6b0ddfbb8cf202faee1b560ec76688" category="paragraph">Cloud Manager は、シンプルなファンアウト / カスケードデータ保護構成をサポートしています。</block>
+  <block id="c1400343880c81f40f5a3faf804c86ae" category="list-text">シンプルな構成では、ボリューム A からボリューム B へのレプリケーションが行われます</block>
+  <block id="efec681cbb459f433d2291a71e215461" category="list-text">ファンアウト構成では、ボリューム A から複数のデスティネーションへのレプリケーションが行われます。</block>
+  <block id="7a850141034065e0218996db71a2ef0c" category="list-text">カスケード構成では、レプリケーションはボリューム A からボリューム B 、およびボリューム B からボリューム C に行われます</block>
+  <block id="dc699e704dec5502b9aa219f9381ad94" category="doc">レプリケーションのドキュメント</block>
+  <block id="3c10116b37b407ac79092a38ffb292e4" category="summary">ネットアップテクニカルサポートでサポートケースをオープンするには、事前に Cloud Manager にネットアップサポートサイトのアカウントを追加し、サポートに登録しておく必要があります。</block>
+  <block id="42748df9eaa0be17ddc5cc1593cf57ab" category="doc">サポートに登録します</block>
+  <block id="d53e2559d6ace0e907fc57192bf286b6" category="paragraph"><block ref="d53e2559d6ace0e907fc57192bf286b6" category="inline-link-macro-rx"></block></block>
+  <block id="7ff191df90fac0fa94ab5c2b5101a5e9" category="sidebar">Cloud Manager のすべてのドキュメント</block>
+  <block id="7596270426e8c5f92be308ff330e0e64" category="sidebar">レプリケーションドキュメント</block>
+  <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">リリースノート</block>
+  <block id="be11c74c1dd7f307bb80183a90dc2067" category="sidebar">はじめに</block>
+  <block id="c27a58445f6be9881526a37e46bb7d26" category="sidebar">データレプリケーションを管理</block>
+  <block id="0460583622f03a52d7693094d6fa2452" category="sidebar">概念</block>
+  <block id="fa26829830efe73376071e3b30f66d6a" category="sidebar">レプリケーションポリシー</block>
+  <block id="9f02509e5496e861df4c341dba05386e" category="sidebar">バックアップポリシー</block>
+  <block id="0adc03eac86772ad2c75c8f140be417e" category="sidebar">知識とサポート</block>
+  <block id="96dbe21e840f318daaf871cafa9f1d1f" category="sidebar">レプリケーションサービスを使用します</block>
+  <block id="813011e2103649bb71f124adedcc10ea" category="sidebar">ブログコミュニティ</block>
+  <block id="dd490b81914dd945601e442a41cb4222" category="sidebar">ネットアップコミュニティ</block>
+  <block id="ff6c37cbc252e306a6b4e390ec13cbc1" category="sidebar">Cloud Central のブログです</block>
+  <block id="ad203e818e0c9d7f42f1c260b33875f3" category="sidebar">クラウドに関する Web セミナー</block>
+</blocks>
