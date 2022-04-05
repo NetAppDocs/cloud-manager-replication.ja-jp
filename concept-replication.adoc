@@ -6,6 +6,7 @@ summary: NetApp SnapMirror は、 LAN または WAN 経由でデータを高速�
 ---
 = レプリケーションサービスについて説明します
 :hardbreaks:
+:allow-uri-read: 
 :nofooter: 
 :icons: font
 :linkattrs: 

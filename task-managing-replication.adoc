@@ -6,6 +6,7 @@ summary: 2 つのシステム間でデータレプリケーションをセット
 ---
 = スケジュールと関係の管理
 :hardbreaks:
+:allow-uri-read: 
 :nofooter: 
 :icons: font
 :linkattrs: 

@@ -6,6 +6,7 @@ summary: ミラーポリシーとは異なり、バックアップ SnapVault ポ
 ---
 = レプリケーションポリシーについて説明します
 :hardbreaks:
+:allow-uri-read: 
 :nofooter: 
 :icons: font
 :linkattrs: 
