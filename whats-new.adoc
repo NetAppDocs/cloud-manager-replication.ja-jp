@@ -25,6 +25,8 @@ Replication サービスの新機能について説明します。
 
 Cloud Volumes ONTAP システムまたはオンプレミスの ONTAP クラスタから ONTAP ファイルシステム用の Amazon FSX にデータをレプリケートできるようになりました。
 
+https://docs.netapp.com/us-en/cloud-manager-replication/task-replicating-data.html["データレプリケーションの設定方法について説明します"]。
+
 
 
 == 2021 年 5 月 5 日
@@ -35,4 +37,4 @@ Cloud Volumes ONTAP システムまたはオンプレミスの ONTAP クラス�
 
 使いやすく、 Cloud Manager のユーザインターフェイスの最新のルックアンドフィールに合わせて、 Replication タブが再設計されました。
 
-image:replication.gif["Cloud Manager の再設計された Replication タブのスクリーンショット。ボリューム関係のリストを示しています。"]
+image:https://raw.githubusercontent.com/NetAppDocs/cloud-manager-replication/main/media/replication.gif["Cloud Manager の再設計された Replication タブのスクリーンショット。ボリューム関係のリストを示しています。"]
