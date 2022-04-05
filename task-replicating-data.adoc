@@ -24,7 +24,7 @@ ONTAP 作業環境間でデータをレプリケートするには、データ�
 作業環境:: まだ作成していない場合は、データレプリケーション関係のソースとターゲットの作業環境を作成する必要があります。
 +
 --
-* https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/task-creating-fsx-working-environment.html["ONTAP 作業環境用の Amazon FSX を作成します"^]
+* https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/start/task-getting-started-fsx.html["ONTAP 作業環境用の Amazon FSX を作成します"^]
 * https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-deploying-otc-aws.html["AWS で Cloud Volumes ONTAP を起動します"^]
 * https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-deploying-otc-azure.html["Azure で Cloud Volumes ONTAP を起動します"^]
 * https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-deploying-gcp.html["GCP で Cloud Volumes ONTAP を起動します"^]
@@ -33,7 +33,12 @@ ONTAP 作業環境間でデータをレプリケートするには、データ�
 
 
 --
-バージョン要件:: データを複製する前に、ソースボリュームとデスティネーションボリュームで互換性のある ONTAP バージョンが実行されていることを確認する必要があります。詳細については、を参照してください http://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-dap/GUID-0810D764-4CEA-4683-8280-032433B1886B.html["データ保護パワーガイド"^]。
+バージョン要件:: データを複製する前に、ソースボリュームとデスティネーションボリュームで互換性のある ONTAP バージョンが実行されていることを確認する必要があります。
++
+--
+https://docs.netapp.com/us-en/ontap/data-protection/compatible-ontap-versions-snapmirror-concept.html["SnapMirror 関係に対して互換性のある ONTAP バージョンを表示します"^]
+
+--
 Cloud Volumes ONTAP 固有の要件::
 +
 --
@@ -53,7 +58,7 @@ ONTAP クラスタ固有の要件::
 * クラスタがオンプレミスにある場合は、企業ネットワークから AWS 、 Azure 、または GCP 内の仮想ネットワークへの接続が必要です。これは通常、 VPN 接続です。
 * ONTAP クラスタは、サブネット、ポート、ファイアウォール、およびクラスタの追加要件を満たしている必要があります。
 +
-詳細については、を参照してください http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["『クラスタ / SVM ピアリングエクスプレスガイド』"^]。
+https://docs.netapp.com/us-en/ontap-sm-classic/peering/reference_prerequisites_for_cluster_peering.html["クラスタピアリングの前提条件については、 ONTAP のドキュメントを参照してください"^]
 
 
 
@@ -105,7 +110,7 @@ image:screenshot_drag_and_drop.gif["スクリーンショット：データレ�
 ヘルプを表示するには、 link:concept-replication-policies.html["レプリケーションポリシーについて説明します"]。
 
 +
-カスタムバックアップ（ SnapVault ）ポリシーを選択した場合は、ポリシーに関連付けられたラベルがソースボリューム上の Snapshot コピーのラベルと一致する必要があります。を参照してください。 link:concept-replication-policies.html#how-backup-policies-work["バックアップポリシーの仕組みを説明します"]。
+カスタムバックアップ（ SnapVault ）ポリシーを選択した場合は、ポリシーに関連付けられたラベルがソースボリューム上の Snapshot コピーのラベルと一致する必要があります。を参照してください。 link:concept-backup-policies.html["バックアップポリシーの仕組みを説明します"]。
 
 . * スケジュール * ： 1 回限りのコピーまたは定期的なスケジュールを選択します。
 +

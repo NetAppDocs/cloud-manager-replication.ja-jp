@@ -47,13 +47,10 @@
   <block id="a82be0f551b8708bc08eb33cd9ded0cf" category="cell">情報</block>
   <block id="d94a71d39d4b5957a9cb08d7b25dc8d1" category="cell">ボリューム関係に関する詳細が表示されます。これには、転送情報、前回の転送情報、ボリュームに関する詳細、関係に割り当てられている保護ポリシーに関する情報が含まれます。</block>
   <block id="e4c38d6d45baf080943d323dd51a2ce8" category="cell">休憩</block>
-  <block id="3592520f476679c41ae085dbea13f855" category="inline-link">ONTAP 9 ボリュームディザスタリカバリエクスプレスガイド</block>
-  <block id="f2bbb0bef78070a1fd8268d9772a2d0c" category="cell">ソースボリュームとデスティネーションボリューム間の関係を解除し、データアクセスのためにデスティネーションボリュームをアクティブにします。このオプションは通常、データの破損、偶発的な削除、オフライン状態などのイベントが原因でソースボリュームがデータを処理できない場合に使用します。データアクセス用のデスティネーションボリュームの設定とソースボリュームの再アクティブ化については、を参照してください<block ref="af502c2f8fb660944e2ad52aad1efcc3" category="inline-link-rx"></block>。</block>
   <block id="45ada1a8b02e7bf10200aedcf56d13c8" category="cell">再同期</block>
   <block id="d41d8cd98f00b204e9800998ecf8427e" category="doc"></block>
   <block id="56f83d4dac34839a8f3a283bafd276e8" category="paragraph">ボリューム間の関係を再確立し、定義されたスケジュールに従ってデータレプリケーションを再開します。</block>
   <block id="f43fdb6878de7980d30d532ea44e0baf" category="admonition">ボリュームを再同期すると、デスティネーションボリュームの内容がソースボリュームの内容によって上書きされます。</block>
-  <block id="5209b5da9877de39bd3385b8056be084" category="paragraph">デスティネーションボリュームからソースボリュームへデータを再同期化する逆再同期を実行するには、を参照してください<block ref="af502c2f8fb660944e2ad52aad1efcc3" category="inline-link-rx"></block>。</block>
   <block id="fb1729afce23e1bd1840f0ba32ef8e91" category="cell">リバース再同期</block>
   <block id="fdd14ac0ba0eae4cebe22311577994f3" category="cell">ソースボリュームとデスティネーションボリュームの役割を逆にします。元のソースボリュームの内容は、デスティネーションボリュームの内容によって上書きされます。これは、オフラインになったソースボリュームを再アクティブ化する場合に役立ちます。前回のデータレプリケーションからソースボリュームが無効になったまでの間に元のソースボリュームに書き込まれたデータは保持されません。</block>
   <block id="67d85e3bd91876173776dc6f189ff7ac" category="cell">スケジュールを編集します</block>
@@ -92,7 +89,6 @@
   <block id="8e7eaac4ef6ddba0d9f93228ce3ac6e7" category="list-text">作業環境</block>
   <block id="4afa74830ae584f2b792dfe5b6c79ccc" category="list-text">まだ作成していない場合は、データレプリケーション関係のソースとターゲットの作業環境を作成する必要があります。</block>
   <block id="64c9a9d3cd7c3ca76cf19b78a96c9b79" category="inline-link">ONTAP 作業環境用の Amazon FSX を作成します</block>
-  <block id="f903e0b8e0f1e5d10c61be1c83633ca0" category="list-text"><block ref="f903e0b8e0f1e5d10c61be1c83633ca0" category="inline-link-rx"></block></block>
   <block id="a3272fd5c4bd1903de9b1b2f5e1665a8" category="inline-link">AWS で Cloud Volumes ONTAP を起動します</block>
   <block id="5fc68dd6c2f9e8f9867008288922972c" category="list-text"><block ref="5fc68dd6c2f9e8f9867008288922972c" category="inline-link-rx"></block></block>
   <block id="70c84621a7336f391b4b7df86b5f1396" category="inline-link">Azure で Cloud Volumes ONTAP を起動します</block>
@@ -104,8 +100,6 @@
   <block id="a1ebf612d281c8e7fb16bbfa253b9627" category="inline-link">ONTAP クラスタを検出</block>
   <block id="49aaf65c31a811a37b2627a951f6f6d2" category="list-text"><block ref="49aaf65c31a811a37b2627a951f6f6d2" category="inline-link-rx"></block></block>
   <block id="3fbe74eae84714fcfdd21edafe54f77f" category="list-text">バージョン要件</block>
-  <block id="9739187f50db857f27b204b12e6d365e" category="inline-link">データ保護パワーガイド</block>
-  <block id="45a002d1b0a2d3b7484b80cb82cbae5f" category="list-text">データを複製する前に、ソースボリュームとデスティネーションボリュームで互換性のある ONTAP バージョンが実行されていることを確認する必要があります。詳細については、を参照してください<block ref="45ba42574012af0d87ad3af840143483" category="inline-link-rx"></block>。</block>
   <block id="fe6efbb95f9a85a506ca5269c7f8ff90" category="list-text">Cloud Volumes ONTAP 固有の要件</block>
   <block id="889d45df47a3ead91725048aa6da9442" category="list-text">インスタンスのセキュリティグループに、必要なインバウンドおよびアウトバウンドのルールが含まれている必要があります。具体的には、 ICMP とポート 11104 および 11105 のルールが必要です。</block>
   <block id="56a907169092bf547ac6f962beae2e1a" category="paragraph">これらのルールは、事前定義されたセキュリティグループに含まれています。</block>
@@ -115,8 +109,6 @@
   <block id="8c4a805dde66a7461e7760fe982d066f" category="list-text">アクティブな SnapMirror ライセンスがインストールされている必要があります。</block>
   <block id="e133ed2609aff998f4ad7507f5e823eb" category="list-text">クラスタがオンプレミスにある場合は、企業ネットワークから AWS 、 Azure 、または GCP 内の仮想ネットワークへの接続が必要です。これは通常、 VPN 接続です。</block>
   <block id="1fbce003d68708feb24931b9e6366f50" category="list-text">ONTAP クラスタは、サブネット、ポート、ファイアウォール、およびクラスタの追加要件を満たしている必要があります。</block>
-  <block id="88c6c83b92078bff672007a244edf6fe" category="inline-link">『クラスタ / SVM ピアリングエクスプレスガイド』</block>
-  <block id="eee57d9d3eea15be2047876cf152e294" category="paragraph">詳細については、を参照してください<block ref="7a715a3c6763f11dce8d04ecae2e7135" category="inline-link-rx"></block>。</block>
   <block id="4f473a2a941d4fd7b4a68e3cd98e934c" category="list-text">Amazon FSX for ONTAP に固有の要件</block>
   <block id="e895824a462fdee602e050151c64f0a6" category="list-text">Amazon FSX for ONTAP 作業環境は、データレプリケーション関係のターゲットである必要があります。</block>
   <block id="7002d9ba5a8e7d19055405e260941870" category="paragraph">ソースは、 Cloud Volumes ONTAP またはオンプレミスの ONTAP クラスタです。</block>
@@ -140,7 +132,6 @@
   <block id="43b69288e2e4056e2603dc7b20958252" category="inline-link-macro">レプリケーションポリシーについて説明します</block>
   <block id="38ae0f8e71302f90ed2bd78cc3558be1" category="paragraph">ヘルプを表示するには、 <block ref="aa986145ecc84d384c81421dbd7256f8" category="inline-link-macro-rx"></block>。</block>
   <block id="94b8e29e9b4ae2edec5679fafc448461" category="inline-link-macro">バックアップポリシーの仕組みを説明します</block>
-  <block id="07c79d9eb85b0d23c55a7b9b67cf02d8" category="paragraph">カスタムバックアップ（ SnapVault ）ポリシーを選択した場合は、ポリシーに関連付けられたラベルがソースボリューム上の Snapshot コピーのラベルと一致する必要があります。を参照してください。 <block ref="75de9650bf9d481877dc0d18e86ffa75" category="inline-link-macro-rx"></block>。</block>
   <block id="d3b2b050bb9494cae757b48c9e54e869" category="list-text">* スケジュール * ： 1 回限りのコピーまたは定期的なスケジュールを選択します。</block>
   <block id="eab21f14d3f6250b2de779be87b8404e" category="paragraph">いくつかのデフォルトスケジュールを使用できます。別のスケジュールを使用する場合は、 System Manager を使用して、 _destination_cluster に新しいスケジュールを作成する必要があります。</block>
   <block id="b651c9a4bed137033ce440a73927ffcf" category="list-text">* 復習 * ：選択内容を確認して、 * 移動 * をクリックします。</block>
@@ -191,4 +182,15 @@
   <block id="40f78d193b858589ad7df4dd4ce61ad6" category="inline-link">データレプリケーションの設定方法について説明します</block>
   <block id="1e56755e05ec049b30c49b9d53744ca1" category="paragraph"><block ref="0337e364432fca0f343e5f2660661b77" category="inline-link-rx"></block>。</block>
   <block id="afd129f297b503a0e765f8dcc6f0d4d4" category="paragraph"><block ref="afd129f297b503a0e765f8dcc6f0d4d4" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="f0cd8087559cf56fb0d34726dbd85d38" category="inline-link">ONTAP のドキュメントで、データアクセスのためのデスティネーションボリュームを設定し、ソースボリュームを再アクティブ化する方法について説明します</block>
+  <block id="eded94fe54d9a9c86f0d510180c58a5d" category="cell">ソースボリュームとデスティネーションボリューム間の関係を解除し、データアクセスのためにデスティネーションボリュームをアクティブにします。このオプションは通常、データの破損、偶発的な削除、オフライン状態などのイベントが原因でソースボリュームがデータを処理できない場合に使用します。<block ref="7a7ac6ccb9be4e5f4f0b719a95b68333" category="inline-link-rx"></block></block>
+  <block id="eb75aeb3b4b2b9734ba3e52f5483f0b2" category="inline-link">ONTAP のドキュメント</block>
+  <block id="e990be7a16b6b4357342c71daaf2bbca" category="paragraph">デスティネーションボリュームからソースボリュームへデータを再同期する逆再同期を実行する方法については、を参照してください<block ref="ab01f841914c89d9d9ffbe330b1e0c0f" category="inline-link-rx"></block>。</block>
+  <block id="6cd346b36825d1f1cef046571571fce0" category="list-text"><block ref="6cd346b36825d1f1cef046571571fce0" category="inline-link-rx"></block></block>
+  <block id="5ab11c0b1a095a5aa6623bf54430fb4b" category="list-text">データを複製する前に、ソースボリュームとデスティネーションボリュームで互換性のある ONTAP バージョンが実行されていることを確認する必要があります。</block>
+  <block id="49a1e754247eba0034ec2a2b3dea46b0" category="inline-link">SnapMirror 関係に対して互換性のある ONTAP バージョンを表示します</block>
+  <block id="b8c6e83fa255fcfab352a5b54339fdb8" category="paragraph"><block ref="b8c6e83fa255fcfab352a5b54339fdb8" category="inline-link-rx"></block></block>
+  <block id="d7bb556723e915c43fe4fd9b0f90d545" category="inline-link">クラスタピアリングの前提条件については、 ONTAP のドキュメントを参照してください</block>
+  <block id="54aa7fca826fcb0f6caefb80a82fe037" category="paragraph"><block ref="54aa7fca826fcb0f6caefb80a82fe037" category="inline-link-rx"></block></block>
+  <block id="d0c8bcc8105dd12af5250cd475e35814" category="paragraph">カスタムバックアップ（ SnapVault ）ポリシーを選択した場合は、ポリシーに関連付けられたラベルがソースボリューム上の Snapshot コピーのラベルと一致する必要があります。を参照してください。 <block ref="1da422ecee672d98d1632cce950d0eeb" category="inline-link-macro-rx"></block>。</block>
 </blocks>
